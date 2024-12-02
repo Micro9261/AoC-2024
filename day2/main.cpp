@@ -10,12 +10,10 @@ int main()
     int mistakes = 0;
     int ch;
     bool safe = true;
-    int line_cnt=0;
     while(1)
     {
         mistakes = 0;
         safe = true;
-        line_cnt++;
         std::vector<int> tmp_buff;
         int tmp;
         do
@@ -74,21 +72,10 @@ int main()
                             break;
                         } 
                     }
-                    if (i == 0 && mistakes == 1)
+                    if (mistakes == i + 1)
                     {
                         safe = true;
-                        break;
-                    }
-                    else if (i == 1 && mistakes == 2)
-                    {
-                        safe = true;
-                        mistakes--;
-                        break;
-                    }
-                    else if (i == 2 && mistakes == 3)
-                    {
                         mistakes = 1;
-                        safe = true;
                         break;
                     }
                 }
@@ -105,7 +92,6 @@ int main()
         else if (mistakes < 2)
         {
             //std::cout << line_cnt << " safe with dumpener" << std::endl;
-            std::cout << std::endl;
             safe_dmp_cnt++;
         }
         if (std::cin.eof())
