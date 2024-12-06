@@ -1,7 +1,8 @@
 #include <iostream>
+#include <cstdlib>
+#include <fstream>
 
-
-int main()
+int main(int argc, char ** argv)
 {
     long long result_p1 = 0;
     long long result_p2 = 0;
@@ -16,7 +17,20 @@ int main()
     const char mul_disable_p[7] = {'d', 'o', 'n', '\'', 't', '(', ')'};
     bool mul_en = true;
 
-    while ( (ch = std::cin.get()) != EOF)
+     if (argc < 2)
+    {
+        std::cerr << "How to use: " << argv[0] << " [input file] " << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
+    std::ifstream f_ptr(argv[1]);
+    if (!f_ptr.good())
+    {
+        std::cerr << "Error opening file " << argv[1] << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
+    while ( (ch = f_ptr.get()) != EOF)
     {
         if ( ch == pattern[state_mul] && state_mul != 4)
         {
@@ -52,25 +66,25 @@ int main()
         state_mul = 0;
         int x;
         int y = 0;
-        if (!(std::cin >> x))
+        if (!(f_ptr >> x))
         {
-            std::cin.clear();
+            f_ptr.clear();
             continue;
         }
  
-        ch = std::cin.get();
+        ch = f_ptr.get();
         if (ch == EOF)
             break;
         else if (ch != ',')
             continue;
 
-        if ( !(std::cin >> y) )
+        if ( !(f_ptr >> y) )
         {
-            std::cin.clear();
+            f_ptr.clear();
             continue;
         }
 
-        ch = std::cin.get();
+        ch = f_ptr.get();
         if (ch == EOF)
             break;
         else if (ch != ')')
@@ -86,5 +100,8 @@ int main()
 
     std::cout << "Part 1 result: " << result_p1 << std::endl;
     std::cout << "Part 2 result: " << result_p2 << std::endl;
+
+    f_ptr.close();
+
     return 0;
 }
