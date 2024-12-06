@@ -1,15 +1,30 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-//answer 373 with Dumpener
+#include <cstdlib>
+#include <fstream>
 
-int main()
+int main(int argc, char ** argv)
 {
     int safe_cnt = 0;
     int safe_dmp_cnt = 0;
     int mistakes = 0;
     int ch;
     bool safe = true;
+
+    if (argc < 2)
+    {
+        std::cerr << "How to use: " << argv[0] << " [input file] " << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
+    std::ifstream f_ptr(argv[1]);
+    if (!f_ptr.good())
+    {
+        std::cerr << "Error opening file " << argv[1] << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
     while(1)
     {
         mistakes = 0;
@@ -18,9 +33,9 @@ int main()
         int tmp;
         do
         {
-            std::cin >> tmp;
+            f_ptr >> tmp;
             tmp_buff.push_back(tmp);
-        }while ( (ch = std::cin.get()) != '\n' && ch != EOF);
+        }while ( (ch = f_ptr.get()) != '\n' && !f_ptr.eof());
     
         std::vector<int> test[3] = {tmp_buff , tmp_buff, tmp_buff};
         while (mistakes < 2)
@@ -94,12 +109,14 @@ int main()
             //std::cout << line_cnt << " safe with dumpener" << std::endl;
             safe_dmp_cnt++;
         }
-        if (std::cin.eof())
+        if (f_ptr.eof())
             break;
     }
 
     std::cout << "Safe reports without Dampener: " << safe_cnt << std::endl;
     std::cout << "Safe reports with Dampener: " << safe_dmp_cnt << std::endl;
+
+    f_ptr.close();
 
     return 0;
 }
