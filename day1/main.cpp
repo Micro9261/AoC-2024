@@ -1,18 +1,33 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
-int main()
+int main(int argc, char ** argv)
 {
+    if (argc < 2)
+    {
+        std::cerr << "How to use: " << argv[0] << " [input file] " << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
+    std::ifstream f_ptr(argv[1]);
+    if (!f_ptr.good())
+    {
+        std::cerr << "Error opening file " << argv[1] << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
     std::vector<int> left_l, right_l;
     while (1)
     {
         int tmp;
-        std::cin >> tmp;
-        if (!std::cin)
+        f_ptr >> tmp;
+        if (!f_ptr)
             break;
         left_l.push_back(tmp);
-        std::cin >> tmp;
+        f_ptr >> tmp;
         right_l.push_back(tmp);
     }
 
@@ -64,6 +79,8 @@ int main()
     }
 
     std::cout << "Sum of similarity score: " << total_sum << std::endl;
+
+    f_ptr.close();
 
     return 0;
 }
