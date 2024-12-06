@@ -5,12 +5,6 @@
 #include <cstdlib>
 #include <fstream>
 
-bool XMAS_check(const std::string & s)
-{
-    std::string check(s.begin(),s.begin()+4);
-    return check == "XMAS" || check == "SMAX" ? true : false;
-}
-
 int main(int argc, char ** argv)
 {
     if (argc < 2)
