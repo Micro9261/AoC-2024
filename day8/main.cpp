@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <utility>
 
-//211 < x << 217 //-215
 
 int main(int argc, char ** argv)
 {
@@ -74,7 +73,6 @@ int main(int argc, char ** argv)
         }
     }
     buff.clear();
-    //std::cout << col_len << ":" << rows << std::endl;
 
     //data ready to analyze
     std::vector<std::pair<int,int> > checked_uniq;
@@ -95,7 +93,7 @@ int main(int argc, char ** argv)
                         continue;
                     if (point_y < 0 || point_y > rows - 1)
                         continue;
-                        
+
                     buff.seekg(point_x + point_y*(col_len+1), buff.beg);
                     int read_ch = buff.get();
                     if (read_ch == '.')

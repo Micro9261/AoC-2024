@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
     const char mul_disable_p[7] = {'d', 'o', 'n', '\'', 't', '(', ')'};
     bool mul_en = true;
 
-     if (argc < 2)
+    if (argc < 2)
     {
         std::cerr << "How to use: " << argv[0] << " [input file] " << std::endl;
         std::exit(EXIT_FAILURE);

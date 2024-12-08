@@ -1,8 +1,8 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <fstream>
 
 int main(int argc, char ** argv)
 {
